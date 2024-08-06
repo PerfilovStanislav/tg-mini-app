@@ -1,4 +1,4 @@
-const api = 'https://2735-185-237-80-251.ngrok-free.app/api';
+const api = 'https://cc64-185-237-80-245.ngrok-free.app/api';
 
 export class ProfileService {
     getSettings(bot_id, init_data) {
@@ -6,8 +6,8 @@ export class ProfileService {
             method: 'POST',
             headers: {
                 'Cache-Control': 'no-cache',
-                bot_id: bot_id,
-                init_data: init_data
+                'bot-id': bot_id,
+                'init-data': init_data
             },
             referrer: '',
             referrerPolicy: 'no-referrer',
@@ -26,8 +26,8 @@ export class ProfileService {
             method: 'POST',
             headers: {
                 'Cache-Control': 'no-cache',
-                bot_id: bot_id,
-                init_data: init_data
+                'bot-id': bot_id,
+                'init-data': init_data
             },
             referrer: '',
             referrerPolicy: 'no-referrer',
@@ -50,8 +50,8 @@ export class ProfileService {
             method: 'POST',
             headers: {
                 'Cache-Control': 'no-cache',
-                bot_id: bot_id,
-                init_data: init_data
+                'bot-id': bot_id,
+                'init-data': init_data
             },
             referrer: '',
             referrerPolicy: 'no-referrer',
