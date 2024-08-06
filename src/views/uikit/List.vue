@@ -93,7 +93,7 @@ const getParam = (key) => {
                         <div class="relative mx-auto">
                             <Carousel :value="getPhotos(item)" :numVisible="1" :numScroll="1" :responsiveOptions="carouselResponsiveOptions" :circular="true">
                                 <template #item="props">
-                                    <img :src="'https://cc64-185-237-80-245.ngrok-free.app/api/photo?id=' + item.id + '&photo=' + props.data" class="w-full h-20rem border-round" style="object-fit: cover" alt="" />
+                                    <img :src="'https://tg-chat.online/api/photo?id=' + item.id + '&photo=' + props.data" class="w-full h-20rem border-round" style="object-fit: cover" alt="" />
                                 </template>
                             </Carousel>
                             <div
@@ -105,7 +105,7 @@ const getParam = (key) => {
                             </div>
                             <Tag severity="success" class="absolute" style="left: 45px; bottom: 52px">
                                 <div class="flex align-items-center gap-2 px-1">
-                                    <img alt="Country" :src="'https://cc64-185-237-80-245.ngrok-free.app/flags/' + item.lang + '.png'" style="width: 24px" />
+                                    <img alt="Country" :src="'https://tg-chat.online/flags/' + item.lang + '.png'" style="width: 24px" />
                                     <span class="text-base">{{ item.age }}</span>
                                 </div>
                             </Tag>

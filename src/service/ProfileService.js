@@ -1,4 +1,4 @@
-const api = 'https://cc64-185-237-80-245.ngrok-free.app/api';
+const api = 'https://tg-chat.online/api';
 
 export class ProfileService {
     getSettings(bot_id, init_data) {
