@@ -3,7 +3,7 @@
     "version": "3.10.0",
     "scripts": {
         "dev": "vite --open --port 5173 --host",
-        "build": "vite build && gzipper compress ./dist",
+        "build": "vite build && gzipper compress ./dist --include js,css,svg --threshold 1024 --skip-compressed",
         "preview": "vite preview",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
     },
