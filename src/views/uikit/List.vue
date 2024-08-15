@@ -51,6 +51,7 @@ const loadSettings = function () {
 
 function loadProfiles() {
     if (canLoad === 0 || (canLoad === 1 && coors())) {
+        canLoad = -1;
         profileService.getProfiles(bot_id, initData, last).then((res) => {
             if (res.length > 0) {
                 profiles.value = [...profiles.value, ...res];
