@@ -1,4 +1,5 @@
 const api = 'https://tg-chat.online/api';
+// const api = 'https://82a9-185-237-80-149.ngrok-free.app/api';
 
 export class ProfileService {
     getSettings(bot_id, init_data) {

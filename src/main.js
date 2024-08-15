@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
+import Tag from 'primevue/tag';
 
 import PrimeVue from 'primevue/config';
 import BadgeDirective from 'primevue/badgedirective';
@@ -32,7 +33,12 @@ app.component('Button', Button);
 app.component('Carousel', Carousel);
 app.component('DataView', DataView);
 app.component('Toast', Toast);
-eruda.init();
+app.component('Tag', Tag);
+
+let urlParams = new URLSearchParams(window.location.search);
+if (urlParams.get('debug') === '1') {
+    eruda.init();
+}
 app.use(VueTelegram);
 
 app.mount('#app');

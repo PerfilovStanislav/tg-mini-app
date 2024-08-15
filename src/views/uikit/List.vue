@@ -1,16 +1,28 @@
 <script setup>
+const url = 'https://tg-chat.online';
+// const url = 'https://82a9-185-237-80-149.ngrok-free.app';
+
 import { ref, onMounted } from 'vue';
 import { vInfiniteScroll } from '@vueuse/components';
 import { ProfileService } from '@/service/ProfileService';
-import { useWebApp, useWebAppViewport } from 'vue-tg';
 import { useToast } from 'primevue/usetoast';
+import { useWebApp, useWebAppViewport, useWebAppTheme, useWebAppRequests } from 'vue-tg';
+
+const { onWriteAccessRequested } = useWebAppRequests();
+const { initData, initDataUnsafe, ready } = useWebApp();
+const { requestWriteAccess } = useWebAppRequests();
+const { expand } = useWebAppViewport();
+
+onWriteAccessRequested((obj) => {
+    if (obj.status === 'allowed') {
+        loadSettings();
+    }
+});
 
 let urlParams = new URLSearchParams(window.location.search);
 const bot_id = urlParams.get('bot');
 
 const toast = useToast();
-const { initData } = useWebApp();
-const { expand } = useWebAppViewport();
 
 let params = {};
 const profiles = ref([]);
@@ -32,7 +44,9 @@ const loadSettings = function () {
     profileService.getSettings(bot_id, initData).then((res) => {
         params = res;
         loadProfiles();
+        ready();
     });
+    useWebAppTheme().setHeaderColor('#000000');
 };
 
 function loadProfiles() {
@@ -72,7 +86,7 @@ const profileService = new ProfileService();
 
 onMounted(() => {
     expand?.();
-    loadSettings();
+    requestWriteAccess?.();
 });
 
 const getPhotos = (profile) => {
@@ -93,7 +107,7 @@ const getParam = (key) => {
                         <div class="relative mx-auto">
                             <Carousel :value="getPhotos(item)" :numVisible="1" :numScroll="1" :responsiveOptions="carouselResponsiveOptions" :circular="true">
                                 <template #item="props">
-                                    <img :src="'https://tg-chat.online/api/photo?id=' + item.id + '&photo=' + props.data" class="w-full h-20rem border-round" style="object-fit: cover" alt="" />
+                                    <img :src="url + '/api/photo?id=' + item.id + '&photo=' + props.data" class="w-full h-20rem border-round" style="object-fit: cover" alt="" />
                                 </template>
                             </Carousel>
                             <div
@@ -105,7 +119,7 @@ const getParam = (key) => {
                             </div>
                             <Tag severity="success" class="absolute" style="left: 45px; bottom: 52px">
                                 <div class="flex align-items-center gap-2 px-1">
-                                    <img alt="Country" :src="'https://tg-chat.online/flags/' + item.lang + '.png'" style="width: 24px" />
+                                    <img alt="Country" :src="url + '/flags/' + item.lang + '.png'" style="width: 24px" />
                                     <span class="text-base">{{ item.age }}</span>
                                 </div>
                             </Tag>
@@ -118,7 +132,7 @@ const getParam = (key) => {
                         </div>
                         <div class="flex flex-column gap-4 mt-4">
                             <div class="flex gap-2">
-                                <Button icon="pi pi-comment" :label="getParam('ask_button')" @click="askStartingDialog(item.id)" class="flex-auto white-space-nowrap"></Button>
+                                <Button :disabled="item.id === initDataUnsafe.user.id" icon="pi pi-comment" :label="getParam('ask_button')" @click="askStartingDialog(item.id)" class="flex-auto white-space-nowrap"></Button>
                             </div>
                         </div>
                     </div>
